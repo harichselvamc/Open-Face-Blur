@@ -21,12 +21,20 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
+      - name: Upgrade pip
+        run: python -m pip install --upgrade pip
+
       - name: Install dependencies
         run: |
-          pip install --upgrade pip
           pip install torch torchvision
-          pip install -r requirements.txt
+          pip install facenet-pytorch
+          pip install opencv-python
+          pip install pillow
+          pip install numpy
 
-      - name: Test import
+      - name: Test imports
         run: |
-          python -c "import cv2, torch, facenet_pytorch"
+          python -c "import torch"
+          python -c "import torchvision"
+          python -c "import cv2"
+          python -c "import facenet_pytorch"
